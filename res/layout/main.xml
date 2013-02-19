@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MainContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+ 	>
+
+    <ImageView
+        android:id="@+id/imageViewPage1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/redbullmotorcycleconcept" />
+    <ImageView
+        android:id="@+id/imageViewPage2"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/imageViewPage1"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitXY"
+        android:background="@drawable/redbullmotorcycleconcept" />
+
+</RelativeLayout>
