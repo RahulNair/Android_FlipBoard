@@ -235,6 +235,7 @@ public class FlipBoardNewsPaper extends Activity{
 	
 	
 	private void startAnimation(final View imgView,final ViewAction viewAction,final ViewPosition viewPosition,int duration) {
+	
 		Animation[] animc = FlipAnimationFactory.flipAnimation(imgView,viewPosition,viewAction, duration,null);
 		animc[0].setAnimationListener(new AnimationListener() {
 			
@@ -676,6 +677,8 @@ public class FlipBoardNewsPaper extends Activity{
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2,	float distanceX, float distanceY) {
 			// TODO Auto-generated method stub
+			
+			int moveByValue = (int) Math.abs(distanceY);
 
 			topCacheImageViewRelativeLayout.invalidate();
 			
@@ -690,11 +693,6 @@ public class FlipBoardNewsPaper extends Activity{
 				moveingBottom = true;
 			}else{
 				return false ;
-//				if(moveingBottom){
-//					moveingBottom = false;
-//				}else{
-//					moveingBottom = true;
-//				}
 			}
 			
 			
@@ -716,7 +714,7 @@ public class FlipBoardNewsPaper extends Activity{
 					if(bottomCacheImageView.getHeight()-10 > 1) {
 						System.out.println("=============UP=================   3 ");
 						System.out.println("=============UP=================   3  if if ifi ");
-						bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height -20;
+						bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height -moveByValue;
 						bottomCacheImageView.setLayoutParams(bottomCacheImageViewLayoutParams);
 						bottomCacheImageView.invalidate();
 					}else{
@@ -725,7 +723,7 @@ public class FlipBoardNewsPaper extends Activity{
 						bottomCacheImageView.setLayoutParams(bottomCacheImageViewLayoutParams);
 						captureImageAndAssingBottomToUp(0);
 						if(topCacheImageViewLayoutParams.topMargin >= 0){
-							topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin - 20;
+							topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin - moveByValue;
 							topCacheImageViewLayoutParams.bottomMargin = 0;
 							topCacheImageView.setLayoutParams(topCacheImageViewLayoutParams);
 						}
@@ -733,13 +731,13 @@ public class FlipBoardNewsPaper extends Activity{
 				}else{
 					System.out.println("=============================  up AA2   ");
 					if(topCacheImageViewLayoutParams.topMargin  <= topCacheImageViewRelativeLayout.getHeight() && bottomCacheImageView.getHeight() <= 0){
-						topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin + 20;
+						topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin + moveByValue;
 						topCacheImageViewLayoutParams.bottomMargin = 0;
 						topCacheImageView.setLayoutParams(topCacheImageViewLayoutParams);
 					}else{
 						System.out.println("================================== upAA3    "+bottomCacheImageViewLayoutParams.height);
 						if(bottomCacheImageViewLayoutParams.height <= bottomCacheImageViewRelativeLayout.getHeight()){
-							bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height + 20;
+							bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height + moveByValue;
 							bottomCacheImageView.setLayoutParams(bottomCacheImageViewLayoutParams);
 							bottomCacheImageView.invalidate();
 						}
@@ -760,14 +758,14 @@ public class FlipBoardNewsPaper extends Activity{
 						System.out.println("=========="+bottomCacheImageViewRelativeLayout.getHeight()+"======== A! bottomCacheImageView.getHeight()  "+bottomCacheImageView.getHeight());
 						if(topCacheImageViewLayoutParams.topMargin > 0 && topCacheImageViewLayoutParams.topMargin < topCacheImageViewRelativeLayout.getHeight() ){
 							System.out.println("=========== AAAAAAAAAA");
-							if(bottomCacheImageView.getHeight() <= bottomCacheImageViewRelativeLayout.getHeight()-10 ){
+							if(bottomCacheImageView.getHeight() <= bottomCacheImageViewRelativeLayout.getHeight()-moveByValue ){
 								System.out.println("=========== A!!!!!");
-								bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height - 10;
+								bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height - moveByValue;
 								bottomCacheImageView.setLayoutParams(bottomCacheImageViewLayoutParams);
 							}else if (bottomCacheImageView.getHeight() <= bottomCacheImageViewRelativeLayout.getHeight()){
 								//captureImageAndAssingUpToBottom(0);
 								System.out.println("=========== A2222");
-								topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin - 10;
+								topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin - moveByValue;
 								topCacheImageView.setLayoutParams(topCacheImageViewLayoutParams);
 								
 //								bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height +10;
@@ -775,13 +773,13 @@ public class FlipBoardNewsPaper extends Activity{
 							}else{
 								System.out.println("=========== A3333");
 
-								topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin - 10;
+								topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin - moveByValue;
 								topCacheImageView.setLayoutParams(topCacheImageViewLayoutParams);
 							}
 						}else{
 							System.out.println("=========== BBBBBBBBBB");
 							if(bottomCacheImageViewLayoutParams.height > 0){
-								bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height - 10;
+								bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height - moveByValue;
 								bottomCacheImageView.setLayoutParams(bottomCacheImageViewLayoutParams);
 							}
 						}
@@ -798,7 +796,7 @@ public class FlipBoardNewsPaper extends Activity{
 						//						if(topCacheImageViewLayoutParams.topMargin <= topCacheImageViewRelativeLayout.getHeight()){
 						if(topCacheImageViewLayoutParams.topMargin >= 0){
 							System.out.println("===================   DOWN ====AAAA  3====if");
-							topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin - 10;
+							topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin - moveByValue;
 							topCacheImageView.setLayoutParams(topCacheImageViewLayoutParams);
 						}
 						//}
@@ -811,18 +809,18 @@ public class FlipBoardNewsPaper extends Activity{
 					//D1
 					System.out.println("=================== D1  DOWN ====  3==== "+ topCacheImageViewLayoutParams.topMargin);
 					captureImageAndAssingUpToBottom(1); 
-					if(topCacheImageViewLayoutParams.topMargin+10 < topCacheImageViewRelativeLayout.getHeight()+10  ){
+					if(topCacheImageViewLayoutParams.topMargin+10 < topCacheImageViewRelativeLayout.getHeight()+moveByValue  ){
 						
 						//D3
 						System.out.println("=================== D3  DOWN ====  3====if");
-						topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin + 10;
+						topCacheImageViewLayoutParams.topMargin = topCacheImageViewLayoutParams.topMargin + moveByValue;
 						topCacheImageView.setLayoutParams(topCacheImageViewLayoutParams);
 					}else{
 						//D4
 						System.out.println("===================D4   DOWN ====  4 " );
 						captureImageAndAssingUpToBottom(0);
 						if(bottomCacheImageViewLayoutParams.height <= bottomCacheImageViewRelativeLayout.getHeight()){
-							bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height +10;
+							bottomCacheImageViewLayoutParams.height = bottomCacheImageViewLayoutParams.height +moveByValue;
 							bottomCacheImageView.setLayoutParams(bottomCacheImageViewLayoutParams);
 
 						}

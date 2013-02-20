@@ -1,10 +1,13 @@
 package FlipAnimation;
 
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import FlipAnimation.AnimationFactory.FlipDirection;
 import FlipAnimation.FlipAnimation.ScaleUpDownEnum;
@@ -46,7 +49,8 @@ public class FlipAnimationFactory {
 		Animation inFlip = new FlipAnimation(centerX,centerY,FlipAnimation.SCALE_DEFAULT,FlipAnimation.ScaleUpDownEnum.SCALE_NONE,viewAction,viewPosition);
 		inFlip.setDuration(duration);
 		inFlip.setFillAfter(true);
-		inFlip.setInterpolator(interpolator==null?new AccelerateInterpolator():interpolator);
+		System.out.println("---interpolator "+interpolator);
+		inFlip.setInterpolator(interpolator==null?new LinearInterpolator():interpolator);
 		inFlip.setStartOffset(duration);   
 		
 		AnimationSet inAnimation = new AnimationSet(true); 
