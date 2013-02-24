@@ -35,7 +35,7 @@ public class FlipAnimationFactory {
 
 		if (viewPosition == ViewPosition.VIEW_TOP_HALF) {
 			centerX = fromView.getWidth() / 2.0f;
-			centerY = 240; 
+			centerY = fromView.getHeight(); 
 				
 		}else if (viewPosition == ViewPosition.VIEW_BOTTOM_HALF) {
 			centerX = fromView.getWidth() / 2.0f;

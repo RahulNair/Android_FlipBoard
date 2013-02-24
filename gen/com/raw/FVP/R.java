@@ -12,17 +12,25 @@ public final class R {
     }
     public static final class drawable {
         public static final int article_g=0x7f020000;
-        public static final int guardian20070511=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int indianexpress=0x7f020003;
-        public static final int news1=0x7f020004;
-        public static final int news2=0x7f020005;
-        public static final int red=0x7f020006;
-        public static final int redbullmotorcycleconcept=0x7f020007;
-        public static final int sunday_times=0x7f020008;
-        public static final int theottawacitizen1=0x7f020009;
-        public static final int times_123=0x7f02000a;
-        public static final int yellow=0x7f02000b;
+        public static final int ft_a=0x7f020001;
+        public static final int ft_b=0x7f020002;
+        public static final int ft_c=0x7f020003;
+        public static final int ft_d=0x7f020004;
+        public static final int ft_e=0x7f020005;
+        public static final int ft_f=0x7f020006;
+        public static final int ft_g=0x7f020007;
+        public static final int ft_h=0x7f020008;
+        public static final int guardian20070511=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int indianexpress=0x7f02000b;
+        public static final int news1=0x7f02000c;
+        public static final int news2=0x7f02000d;
+        public static final int red=0x7f02000e;
+        public static final int redbullmotorcycleconcept=0x7f02000f;
+        public static final int sunday_times=0x7f020010;
+        public static final int theottawacitizen1=0x7f020011;
+        public static final int times_123=0x7f020012;
+        public static final int yellow=0x7f020013;
     }
     public static final class id {
         public static final int MainContainer=0x7f050000;

@@ -19,6 +19,7 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -64,8 +65,10 @@ public class FlipBoardNewsPaper extends Activity{
 	private String TOPIMAGE = "topImage";
 	private String BOTHIMAGE = "bothImage";
 
-	Integer[] listOfNewsFeed  = {R.drawable.news1,R.drawable.news2,R.drawable.indianexpress,R.drawable.guardian20070511,R.drawable.times_123,R.drawable.article_g,
-			R.drawable.sunday_times,R.drawable.theottawacitizen1};
+//	Integer[] listOfNewsFeed  = {R.drawable.news1,R.drawable.news2,R.drawable.indianexpress,R.drawable.guardian20070511,R.drawable.times_123,R.drawable.article_g,
+//			R.drawable.sunday_times,R.drawable.theottawacitizen1};
+	Integer[] listOfNewsFeed  = {R.drawable.ft_a,R.drawable.ft_b,R.drawable.ft_c,R.drawable.ft_e,R.drawable.ft_g,R.drawable.ft_d,
+			R.drawable.ft_h};
 	
 //	Integer[] listOfNewsFeed  = {R.drawable.news1,R.drawable.news2};
 	int countOfPage = 0;
@@ -84,6 +87,7 @@ public class FlipBoardNewsPaper extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		_context = this;
 		setContentView(R.layout.newpapers);
@@ -154,6 +158,52 @@ public class FlipBoardNewsPaper extends Activity{
 					bottomCacheImageView.setAnimation(null);
 					return true;
 				}else if(event.getAction() == MotionEvent.ACTION_UP){
+					System.out.println("==MotionEvent.ACTION_UP=MotionEvent.ACTION_UP=MotionEvent.ACTION_UP=MotionEvent.ACTION_UP=MotionEvent.ACTION_UP=MotionEvent.ACTION_UP=");
+					
+					
+					if (moveingBottom) {
+						
+						if (bottomCacheImageView.getHeight() == 0) {
+							// swipe started from bottom crossed to top half 
+							topCacheImageViewLayoutParams = null;
+							topCacheImageViewLayoutParams  = new LayoutParams(LayoutParams.FILL_PARENT, displayHeight/2);
+							topCacheImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+							topCacheImageView.setLayoutParams(topCacheImageViewLayoutParams);
+							
+							if (topCacheImageView.getAnimation() != null) {
+								topCacheImageView.getAnimation().cancel();	
+							}
+							startAnimation(topCacheImageView, ViewAction.CLOSE_VIEW, ViewPosition.VIEW_TOP_HALF,195	);
+						}else{
+							if (bottomCacheImageView.getAnimation() != null) {
+								bottomCacheImageView.getAnimation().cancel();	
+							}
+							startAnimation(bottomCacheImageView, ViewAction.OPEN_VIEW, ViewPosition.VIEW_BOTTOM_HALF,195);	
+						}
+						
+					}else{
+						if (topCacheImageView.getHeight() == 0) {
+							System.out.println("==MotionEvent.ACTION_UP=====****************==========");
+							//started from top crossed to bottom half
+							bottomCacheImageViewLayoutParams = null;
+							bottomCacheImageViewLayoutParams  = new LayoutParams(LayoutParams.FILL_PARENT, displayHeight/2);
+							bottomCacheImageViewLayoutParams.addRule(RelativeLayout.BELOW,topCacheImageView.getId());
+							bottomCacheImageView.setLayoutParams(bottomCacheImageViewLayoutParams);
+							
+							if (bottomCacheImageView.getAnimation() != null) {
+								bottomCacheImageView.getAnimation().cancel();	
+							}
+							startAnimation(bottomCacheImageView, ViewAction.CLOSE_VIEW, ViewPosition.VIEW_BOTTOM_HALF,195);
+							
+						}else{
+							if (topCacheImageView.getAnimation() != null) {
+								topCacheImageView.getAnimation().cancel();	
+							}
+							startAnimation(topCacheImageView, ViewAction.OPEN_VIEW, ViewPosition.VIEW_TOP_HALF,195);	
+						}
+						
+						
+					}
 					
 					isFingerDown = false;
 					countForMotionTest = -1;
@@ -172,52 +222,6 @@ public class FlipBoardNewsPaper extends Activity{
 					System.out.println("==MotionEvent.ACTION_UP================topCacheImageView.getHeight() "+topCacheImageView.getHeight());
 					System.out.println("==MotionEvent.ACTION_UP========@@=======movingBottom "+moveingBottom);
 					System.out.println("==MotionEvent.ACTION_UP================distanceY "+distanceYcpy);
-				
-					
-					if (moveingBottom) {
-						
-						if (bottomCacheImageView.getHeight() == 0) {
-							// swipe started from bottom crossed to top half 
-							topCacheImageViewLayoutParams = null;
-							topCacheImageViewLayoutParams  = new LayoutParams(LayoutParams.FILL_PARENT, displayHeight/2);
-							topCacheImageViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-							topCacheImageView.setLayoutParams(topCacheImageViewLayoutParams);
-							
-							if (topCacheImageView.getAnimation() != null) {
-								topCacheImageView.getAnimation().cancel();	
-							}
-							startAnimation(topCacheImageView, ViewAction.CLOSE_VIEW, ViewPosition.VIEW_TOP_HALF,150);
-						}else{
-							if (bottomCacheImageView.getAnimation() != null) {
-								bottomCacheImageView.getAnimation().cancel();	
-							}
-							startAnimation(bottomCacheImageView, ViewAction.OPEN_VIEW, ViewPosition.VIEW_BOTTOM_HALF,250);	
-						}
-						
-					}else{
-						if (topCacheImageView.getHeight() == 0) {
-							System.out.println("==MotionEvent.ACTION_UP=====****************==========");
-							//started from top crossed to bottom half
-							bottomCacheImageViewLayoutParams = null;
-							bottomCacheImageViewLayoutParams  = new LayoutParams(LayoutParams.FILL_PARENT, displayHeight/2);
-							bottomCacheImageViewLayoutParams.addRule(RelativeLayout.BELOW,topCacheImageView.getId());
-							bottomCacheImageView.setLayoutParams(bottomCacheImageViewLayoutParams);
-							
-							if (bottomCacheImageView.getAnimation() != null) {
-								bottomCacheImageView.getAnimation().cancel();	
-							}
-							startAnimation(bottomCacheImageView, ViewAction.CLOSE_VIEW, ViewPosition.VIEW_BOTTOM_HALF,150);
-							
-						}else{
-							if (topCacheImageView.getAnimation() != null) {
-								topCacheImageView.getAnimation().cancel();	
-							}
-							startAnimation(topCacheImageView, ViewAction.OPEN_VIEW, ViewPosition.VIEW_TOP_HALF,250);	
-						}
-						
-						
-					}
-					
 				
 
 					return true;
